@@ -1,184 +1,223 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
+/* ============================================================
+   App.css — 개발자 AI 도구상자 스타일 (code agent와 동일한 다크+민트 톤)
+   ============================================================
+   색을 바꾸고 싶으면 아래 :root 변수만 수정하면 된다.
+   ============================================================ */
+
+:root {
+  --bg: #0b0d12;
+  --card: #141821;
+  --line: #232936;
+  --text: #eef1f6;
+  --dim: #98a1b2;
+  --faint: #5a6474;
+  --accent: #6ee7c7;            /* 민트 포인트 (code agent와 동일) */
+  --sans: "Inter", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 전체 배경 */
+.app {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);   /* 도구상자는 모노 폰트 톤이 어울림 */
+  padding: 40px 20px;
+}
+
+/* 가운데 정렬 컨테이너 */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* 제목 */
+.title {
+  font-size: 28px;
+  color: var(--text);
+  margin: 0;
+  font-weight: 700;
+}
+
+/* 제목 앞의 > 기호에 민트색 포인트 */
+.prompt-mark {
   color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+.subtitle {
+  color: var(--dim);
+  font-size: 14px;
+  margin-top: 8px;
 }
 
-#center {
+/* ── 탭 ── */
+.tabs {
   display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+  gap: 4px;
+  margin: 28px 0 20px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+.tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--dim);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+.tab:hover {
+  color: var(--text);
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+/* 선택된 탭: 흰 글자 + 민트 밑줄 */
+.tab.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+/* 안내 문구 */
+.hint {
+  color: var(--dim);
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
-.ticks {
-  position: relative;
+/* ── 입력창 ── */
+.input {
   width: 100%;
+  min-height: 160px;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+.input::placeholder {
+  color: var(--faint);
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+.input:focus {
+  border-color: rgba(110, 231, 199, 0.47);
+}
+
+/* ── 실행 버튼 줄 ── */
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.run-btn {
+  background: var(--accent);
+  color: #0b0d12;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.run-btn:disabled {
+  background: var(--faint);
+  color: var(--dim);
+  cursor: default;
+}
+
+.error-text {
+  color: #ff8080;
+  font-size: 13px;
+}
+
+/* ── 결과 영역 ── */
+.result {
+  margin-top: 24px;
+}
+
+.result-label {
+  color: var(--dim);
+  font-size: 13px;
+}
+
+.result-box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 4px 18px;
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #d5dae2;
+  overflow-x: auto;
+}
+
+/* ── 마크다운 내부 요소 ── */
+/* 코드 블록 */
+.md-code-block {
+  display: block;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);   /* 코드 글자를 민트 톤으로 */
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* 인라인 코드 */
+.md-code-inline {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+
+/* 표 */
+.md-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.md-th {
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+  background: #1c2130;
+  text-align: left;
+}
+
+.md-td {
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+}
+
+/* 링크 */
+.md-link {
+  color: var(--accent);
 }
