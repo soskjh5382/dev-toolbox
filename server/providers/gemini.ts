@@ -12,7 +12,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 // 사용할 모델. Flash 계열이 무료 등급 대상.
-const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
 
 // 프롬프트를 받아 Gemini의 답변 텍스트를 돌려주는 함수.
 // (Claude의 callClaude와 입출력 모양이 똑같다)
